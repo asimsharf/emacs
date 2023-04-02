@@ -1,24 +1,22 @@
-gcc=gcc -Wall -Wextra -Werror -pedantic -std=c11 -Wno-format -Iinc
+CC			=gcc
+CFLAGS		=-Wall -Wextra -Werror -pedantic -std=c11 -Wno-format -Iinc
+LDFLAGS		=
+LIBS		=
+OBJECTS		=$(patsubst inc/%.c, %.o, $(wildcard inc/*.c)) $(patsubst src/%.c, %.o, $(wildcard src/*.c))
+MAIN		=main
 
-main: main.o successful_pairs.o three_sum_closest.o three_sum.o
-	$(gcc) bin/main.o bin/successful_pairs.o bin/three_sum_closest.o bin/three_sum.o -o main
+all: $(MAIN)
+$(MAIN): $(OBJECTS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o bin/$@ $^ $(LIBS)
 
+%.o: inc/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-main.o: src/main.c
-	$(gcc) -c src/main.c  -o bin/main.o
+%.o: src/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-successful_pairs.o: inc/successful_pairs.c
-	$(gcc) -c inc/successful_pairs.c -o bin/successful_pairs.o
-
-three_sum_closest.o: inc/three_sum_closest.c
-	$(gcc) -c inc/three_sum_closest.c -o bin/three_sum_closest.o
-
-three_sum.o: inc/three_sum.c
-	$(gcc) -c inc/three_sum.c -o bin/three_sum.o
-
-
-launch: main
-	./main
+run: $(MAIN)
+	./bin/$(MAIN)
 
 clean:
-	rm -f main bin/*.o
+	rm -f $(OBJECTS) $(MAIN)
