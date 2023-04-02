@@ -1,0 +1,7 @@
+*.o
+bin/
+inc/*.o
+src/*.o
+.gitignore
+.git/
+LICENSE

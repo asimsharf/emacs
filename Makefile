@@ -20,3 +20,13 @@ run: $(MAIN)
 
 clean:
 	rm -f $(OBJECTS) $(MAIN)
+
+.ignore:
+	echo "bin/" > .ignore
+	echo "inc/*.o" >> .ignore
+	echo "src/*.o" >> .ignore
+	echo "Makefile" >> .ignore
+	echo "README.md" >> .ignore
+	echo ".gitignore" >> .ignore
+	echo ".git/" >> .ignore
+	echo "LICENSE" >> .ignore
