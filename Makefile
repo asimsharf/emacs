@@ -1,5 +1,5 @@
 CC			=gcc
-CFLAGS		=-Wall -Wextra -Werror -pedantic -std=c11 -Wno-format -Iinc
+CFLAGS		=-Wall -pedantic -Werror -Wextra -std=gnu89 -Wno-format -Iinc
 LDFLAGS		=
 LIBS		=
 OBJECTS		=$(patsubst inc/%.c, %.o, $(wildcard inc/*.c)) $(patsubst src/%.c, %.o, $(wildcard src/*.c))
