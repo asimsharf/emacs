@@ -1,5 +1,5 @@
 CC			=gcc
-CFLAGS		=-Wall -pedantic -Werror -Wextra -std=gnu89 -Wno-format -Iinc
+CFLAGS		=-Wall -pedantic -Werror -Wextra -std=gnu99 -Wno-format -Iinc
 LDFLAGS		=
 LIBS		=
 OBJECTS		=$(patsubst inc/%.c, %.o, $(wildcard inc/*.c)) $(patsubst src/%.c, %.o, $(wildcard src/*.c))
@@ -15,8 +15,12 @@ $(MAIN): $(OBJECTS)
 %.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
+gdb: $(MAIN)
+	gdb ./bin/$(MAIN)
+
 run: $(MAIN)
 	./bin/$(MAIN)
+	make clean
 
 clean:
 	rm -f $(OBJECTS) $(MAIN)
